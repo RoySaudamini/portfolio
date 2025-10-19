@@ -1,0 +1,26 @@
+[
+  {
+    "title": "AI Based Child Safety System",
+    "description": "An intelligent system designed with Python, OpenCV, Arduino UNO R3, RFID, and an LCD screen for automated child check-in and check-out at schools and daycare centers.",
+    "technologies": ["Python", "OpenCV","Ultralytics", "Arduino", "RFID", "PYWhat Kit"],
+    "status": "Completed",
+    "github": "#",
+    "demo": "#"
+  },
+  {
+    "title": "FarmBot: Smart Agriculture System",
+    "description": "A chatBot to help the farmers with there crop related queries and to provide them with the best possible solutions.",
+    "technologies": ["Python", "JavaScript", "Gemini APIs", "Firebase"],
+    "status": "In Progress",
+    "github": "#",
+    "demo": "#"
+  },
+  {
+    "title": "Weather Dashboard",
+    "description": "Interactive weather dashboard displaying real-time weather data with forecasts and beautiful visualizations.",
+    "technologies": ["JavaScript", "API Integration", "Chart.js", "CSS"],
+    "status": "Completed",
+    "github": "#",
+    "demo": "#"
+  }
+]

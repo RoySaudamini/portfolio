@@ -1,0 +1,23 @@
+[
+  {
+    "title": "Innovation Battle",
+    "description": "Developed innovative solutions using blockchain technology",
+    "type": "Project Competition",
+    "certificate": true,
+    "certificateUrl": "/certificates/innovation_battle.jpg"
+  },
+  {
+    "title": "Hack Snippet 3.0",
+    "description": "An intense 24-hour hackathon focused on building AI and ML prototypes.",
+    "type": "Hackathon",
+    "certificate": false,
+    "certificateUrl": null
+  },
+  {
+    "title": "Script Grid 2.0",
+    "description": "Competitive coding events that challenged algorithmic and problem-solving skills.",
+    "type": "Coding Competition",  
+    "certificate": false,
+    "certificateUrl": null
+  }
+]

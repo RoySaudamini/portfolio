@@ -1,0 +1,41 @@
+{
+  "skillCategories": [
+    {
+      "title": "Programming Languages",
+      "icon": "Code",
+      "skills": [
+        { "name": "Java", "level": 95 },
+        { "name": "Python", "level": 85 },
+        { "name": "Q Basic", "level": 80 },
+        { "name": "C", "level": 70 }
+      ]
+    },
+    {
+      "title": "AI & ML",
+      "icon": "Brain",
+      "skills": [
+        { "name": "Python", "level": 75 },
+        { "name": "Pandas", "level": 70 },
+        { "name": "OpenCV", "level": 80 },
+        { "name": "NumPy", "level": 85 }
+      ]
+    }
+  ],
+  "circleSkills": [
+    { "name": "Data Structures & Algorithms", "level": 85 },
+    { "name": "Team Collaboration", "level": 80 },
+    { "name": "Communication", "level": 95 },
+    { "name": "Time Management", "level": 90 }
+  ],
+  "toolsAndTechnologies": [
+    "VS Code",
+    "GitHub",
+    "Git",
+    "Linux",
+    "AutoCAD",
+    "Figma",
+    "Canva",
+    "TinkerCAD",
+    "Arduino IDE"
+  ]
+}

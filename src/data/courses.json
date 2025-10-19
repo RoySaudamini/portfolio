@@ -1,0 +1,38 @@
+[
+  {
+    "title": "Developing Soft Skills and Personality",
+    "instructor": "Prof. T. Ravichandran, IIT Kanpur, NPTEL",
+    "certificate": true,
+    "certificateUrl": "/src/images/courses/softskills.jpg"
+  },
+  {
+    "title": "Programming with Generative AI",
+    "instructor": "Prof. Viraj Kumar, IISc Bangalore, NPTEL",
+    "certificate": false,
+    "certificateUrl": null
+  },
+  {
+    "title": "Cyber Security Fundamentals",
+    "instructor": "University of London, Coursera",
+    "certificate": false,
+    "certificateUrl": null
+  },
+  {
+    "title": "C and C++",
+    "instructor": "Prof. Kannan Moudgalya, IIT Bombay, NPTEL",
+    "certificate": false,
+    "certificateUrl": "null"
+  },
+  {
+    "title": "Arduino",
+    "instructor": "Prof. Kannan Moudgalya, IIT Bombay, NPTEL",
+    "certificate": false,
+    "certificateUrl": "null"
+  },
+  {
+    "title": "Advanced C++",
+    "instructor": "Prof. Kannan Moudgalya, IIT Bombay, NPTEL",
+    "certificate": false,
+    "certificateUrl": null
+  }
+]

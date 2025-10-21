@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Redirecting...</title>
+  <script>
+    // Single Page Apps for GitHub Pages
+    // https://github.com/rafrex/spa-github-pages
+    // This script redirects to the root /index.html with the correct query parameters
+    (function() {
+      var pathSegments = window.location.pathname.split('/');
+      // Check if we're already on the base path
+      var basePath = '/portfolio/';
+      var isNotBasePathOrIndex = window.location.pathname !== basePath && 
+                                window.location.pathname !== basePath + 'index.html';
+      
+      if (isNotBasePathOrIndex) {
+        // Redirect to the base path and append the original path as a hash
+        var redirectUrl = window.location.protocol + '//' + window.location.host + basePath;
+        redirectUrl += '/#' + window.location.pathname.slice(basePath.length);
+        window.location.replace(redirectUrl);
+      }
+    })();
+  </script>
+</head>
+<body>
+  If you are not redirected automatically, please <a href="/portfolio/">click here</a>.
+</body>
+</html>

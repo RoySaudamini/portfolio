@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+// Ensure the exact filename with correct case sensitivity
+import profileImage from "../images/profile_image.jpg";
 
 export const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -21,7 +23,7 @@ export const Hero = () => {
               <div className="absolute inset-0 bg-gradient-to-br from-primary to-accent rounded-2xl blur-2xl opacity-30 animate-glow" />
               <div className="relative w-80 h-80 sm:w-96 sm:h-96 lg:w-[36rem] lg:h-[36rem] rounded-2xl overflow-hidden border-2 border-primary/30 shadow-2xl">
                 <img
-                  src="https://roysaudamini.github.io/saudaminiroy.github.io/MyImage.jpg"
+                  src={profileImage}
                   alt="Saudamini Roy"
                   className="w-full h-full object-cover"
                 />

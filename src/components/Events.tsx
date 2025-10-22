@@ -9,7 +9,22 @@ export const Events = () => {
   const [selectedCertificates, setSelectedCertificates] = useState<{name: string, urls: string[]} | null>(null);
   const [currentCertificateIndex, setCurrentCertificateIndex] = useState(0);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [certificateImages, setCertificateImages] = useState<Record<string, string>>({});
   const sectionRef = useRef<HTMLDivElement>(null);
+  
+  // Load certificate images dynamically
+  useEffect(() => {
+    const images = import.meta.glob('/src/images/events/*', { eager: true });
+    const imageMap: Record<string, string> = {};
+    
+    Object.entries(images).forEach(([path, module]) => {
+      const fileName = path.split('/').pop() || '';
+      imageMap[fileName] = (module as { default: string }).default;
+    });
+    
+    console.log("Loaded certificate images:", imageMap);
+    setCertificateImages(imageMap);
+  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -31,18 +46,47 @@ export const Events = () => {
   // Helper function to extract all certificate URLs from an event object
   const getCertificateUrls = (event: Record<string, unknown>): string[] => {
     const urls: string[] = [];
-    let counter = 1;
+    let counter = 0; // Start from 0 to check certificateLink1, certificateLink2, etc.
     
     // Check certificateLink first
     if (event.certificateLink && typeof event.certificateLink === 'string') {
-      urls.push(event.certificateLink);
+      const fileName = (event.certificateLink as string).split('/').pop() || '';
+      // Try to find the image in certificateImages with any extension
+      const matchingImage = Object.keys(certificateImages).find(key => {
+        const nameWithoutExt = key.replace(/\.[^/.]+$/, '');
+        const urlWithoutExt = fileName.replace(/\.[^/.]+$/, '');
+        return nameWithoutExt === urlWithoutExt;
+      });
+      
+      if (matchingImage && certificateImages[matchingImage]) {
+        urls.push(certificateImages[matchingImage]);
+      } else {
+        console.warn(`Certificate image not found for: ${fileName}`);
+      }
     }
     
-    // Check certificateLink2, certificateLink3, etc.
+    // Check certificateLink1, certificateLink2, certificateLink3, etc.
     while (event[`certificateLink${counter + 1}`] && typeof event[`certificateLink${counter + 1}`] === 'string') {
-      urls.push(event[`certificateLink${counter + 1}`] as string);
+      const certLink = event[`certificateLink${counter + 1}`] as string;
+      const fileName = certLink.split('/').pop() || '';
+      
+      const matchingImage = Object.keys(certificateImages).find(key => {
+        const nameWithoutExt = key.replace(/\.[^/.]+$/, '');
+        const urlWithoutExt = fileName.replace(/\.[^/.]+$/, '');
+        return nameWithoutExt === urlWithoutExt;
+      });
+      
+      if (matchingImage && certificateImages[matchingImage]) {
+        urls.push(certificateImages[matchingImage]);
+      } else {
+        console.warn(`Certificate image not found for: ${fileName}`);
+      }
+      
       counter++;
     }
+    
+    // Log for debugging
+    console.log("Certificate URLs found:", urls);
     
     return urls;
   };
@@ -67,8 +111,8 @@ export const Events = () => {
   };
 
   return (
-    <section id="events" className="py-20 px-4 sm:px-6 lg:px-8 bg-secondary/30" ref={sectionRef}>
-      <div className="container mx-auto">
+    <section id="events" className="py-20 px-3 sm:px-6 lg:px-8 bg-secondary/30" ref={sectionRef}>
+      <div className="container mx-auto px-2 sm:px-4">
         <div className="text-center mb-16">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
             Events Attended
@@ -76,11 +120,11 @@ export const Events = () => {
           <div className="w-24 h-1 bg-gradient-to-r from-primary to-accent mx-auto rounded-full" />
         </div>
 
-        <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-6 w-[94%] sm:w-auto max-w-5xl mx-auto">
           {eventsData.map((event, index) => (
             <Card
               key={index}
-              className={`transition-all duration-700 hover:shadow-elegant ${
+              className={`transition-all duration-700 hover:shadow-elegant w-full ${
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
               }`}
               style={{ transitionDelay: `${index * 150}ms` }}
@@ -88,21 +132,21 @@ export const Events = () => {
               <CardHeader>
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
-                    <CardTitle className="text-xl mb-2">{event.title}</CardTitle>
-                    <CardDescription>{event.description}</CardDescription>
+                    <CardTitle className="text-base sm:text-xl mb-2">{event.title}</CardTitle>
+                    <CardDescription className="text-xs sm:text-sm">{event.description}</CardDescription>
                   </div>
-                  <div className="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center">
-                    <Award className="h-6 w-6 text-accent" />
+                  <div className="w-8 h-8 sm:w-12 sm:h-12 rounded-lg bg-accent/10 flex items-center justify-center">
+                    <Award className="h-4 w-4 sm:h-6 sm:w-6 text-accent" />
                   </div>
                 </div>
               </CardHeader>
               <CardContent>
                 <div className="flex items-center justify-between gap-4">
-                  <span className="text-sm text-muted-foreground">Event Participation</span>
+                  <span className="text-xs sm:text-sm text-muted-foreground">Event Participation</span>
                   {event.certificateLink && (
                     <button
                       onClick={() => handleCertificateClick(event.title, event)}
-                      className="text-xs bg-primary/10 text-primary px-3 py-1 rounded-full font-medium hover:bg-primary/20 transition-colors cursor-pointer"
+                      className="text-[10px] sm:text-xs bg-primary/10 text-primary px-2 sm:px-3 py-1 rounded-full font-medium hover:bg-primary/20 transition-colors cursor-pointer"
                     >
                       View Certificate
                     </button>
@@ -152,7 +196,17 @@ export const Events = () => {
                   if (fallback) fallback.classList.remove('hidden');
                 }}
               />
-            ) : null}
+            ) : (
+              // Show fallback immediately if no certificate URL is available
+              <div className="text-center space-y-4">
+                <Award size={64} className="text-primary mx-auto" />
+                <h3 className="text-xl font-semibold">Certificate of Participation</h3>
+                <p className="text-muted-foreground">For {selectedCertificates?.name}</p>
+                <p className="text-sm text-muted-foreground mt-4">
+                  Certificate image could not be loaded.
+                </p>
+              </div>
+            )}
             
             {/* Next button */}
             {selectedCertificates && selectedCertificates.urls.length > 1 && currentCertificateIndex < selectedCertificates.urls.length - 1 && (
@@ -165,7 +219,7 @@ export const Events = () => {
               </button>
             )}
             
-            {/* Fallback placeholder */}
+            {/* Fallback placeholder for onError */}
             <div className="text-center space-y-4 hidden">
               <Award size={64} className="text-primary mx-auto" />
               <h3 className="text-xl font-semibold">Certificate of Participation</h3>

@@ -33,9 +33,9 @@ export const Navigation = () => {
   ];
 
   const socialLinks = [
-    { icon: Linkedin, href: "https://linkedin.com", label: "LinkedIn" },
-    { icon: Twitter, href: "https://twitter.com", label: "Twitter" },
-    { icon: Github, href: "https://github.com", label: "GitHub" },
+    { icon: Linkedin, href: "https://www.linkedin.com/in/saudamini-roy-a28005377/", label: "LinkedIn" },
+    { icon: Twitter, href: "https://x.com/RoySaudamini", label: "Twitter" },
+    { icon: Github, href: "https://github.com/RoySaudamini", label: "GitHub" },
   ];
 
   return (

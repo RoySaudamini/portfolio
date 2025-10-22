@@ -59,7 +59,7 @@ const SkillBar = ({ name, level }: Skill) => {
 const CircularProgress = ({ name, level }: CoreCompetency) => {
   const [progress, setProgress] = useState(0);
   const circleRef = useRef<HTMLDivElement>(null);
-  const radius = 45;
+  const radius = 42;
   const circumference = 2 * Math.PI * radius;
   const offset = circumference - (progress / 100) * circumference;
 
@@ -82,14 +82,14 @@ const CircularProgress = ({ name, level }: CoreCompetency) => {
 
   return (
     <div ref={circleRef} className="flex flex-col items-center">
-      <div className="relative w-32 h-32">
-        <svg className="transform -rotate-90 w-32 h-32" viewBox="0 0 120 120">
+      <div className="relative w-28 h-28 sm:w-32 sm:h-32">
+        <svg className="transform -rotate-90 w-full h-full" viewBox="0 0 120 120">
           <circle
             cx="60"
             cy="60"
             r={radius}
             stroke="currentColor"
-            strokeWidth="8"
+            strokeWidth="7"
             fill="none"
             className="text-secondary"
           />
@@ -98,7 +98,7 @@ const CircularProgress = ({ name, level }: CoreCompetency) => {
             cy="60"
             r={radius}
             stroke="currentColor"
-            strokeWidth="8"
+            strokeWidth="7"
             fill="none"
             strokeDasharray={circumference}
             strokeDashoffset={offset}
@@ -107,10 +107,10 @@ const CircularProgress = ({ name, level }: CoreCompetency) => {
           />
         </svg>
         <div className="absolute inset-0 flex items-center justify-center">
-          <span className="text-xl font-bold text-primary">{progress}%</span>
+          <span className="text-lg sm:text-xl font-bold text-primary">{progress}%</span>
         </div>
       </div>
-      <span className="mt-3 text-sm font-medium text-foreground">{name}</span>
+      <span className="mt-3 text-xs sm:text-sm font-medium text-foreground">{name}</span>
     </div>
   );
 };
@@ -142,8 +142,8 @@ export const Skills = () => {
   const toolsAndTechnologies: string[] = skillsData.toolsAndTechnologies || [];
 
   return (
-    <section id="skills" className="py-20 px-4 sm:px-6 lg:px-8">
-      <div className="container mx-auto max-w-6xl">
+    <section id="skills" className="py-20 px-3 sm:px-6 lg:px-8">
+      <div className="container mx-auto max-w-6xl px-2 sm:px-4">
         <div className="text-center mb-16">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
             Skills
@@ -151,15 +151,15 @@ export const Skills = () => {
           <div className="w-24 h-1 bg-gradient-to-r from-primary to-accent mx-auto rounded-full" />
         </div>
 
-        <div className="grid md:grid-cols-2 gap-6 mb-12 max-w-5xl mx-auto">
+  <div className="grid md:grid-cols-2 gap-5 sm:gap-6 mb-4 sm:mb-12 w-[96%] sm:max-w-5xl mx-auto">
           {skillCategories.map((category, index) => {
             const Icon = category.icon;
             return (
               <Card
                 key={index}
-                className="p-6 hover:shadow-lg transition-all duration-300 bg-card/50 backdrop-blur border-muted"
+                className="p-3 sm:p-6 hover:shadow-lg transition-all duration-300 bg-card/50 backdrop-blur border-muted"
               >
-                <div className="flex items-center gap-2 mb-5">
+                <div className="flex items-center gap-2 mb-3 sm:mb-5">
                   <Icon className="text-primary" size={18} />
                   <h3 className="text-base font-bold">{category.title}</h3>
                 </div>
@@ -173,22 +173,22 @@ export const Skills = () => {
           })}
         </div>
 
-        <div className="mt-16 p-8 border border-muted/40 rounded-xl bg-card/30 shadow-sm hover:shadow-lg transition-shadow duration-300 max-w-5xl mx-auto">
-          <h3 className="text-2xl font-bold text-center mb-10">Core Competencies</h3>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 justify-items-center">
+  <div className="mt-7 sm:mt-16 p-4 sm:p-8 border border-muted/40 rounded-xl bg-card/30 shadow-sm hover:shadow-lg transition-shadow duration-300 w-[96%] sm:max-w-5xl mx-auto">
+          <h3 className="text-xl sm:text-2xl font-bold text-center mb-5 sm:mb-10">Core Competencies</h3>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-6 justify-items-center">
             {coreCompetencies.map((competency, index) => (
               <CircularProgress key={index} {...competency} />
             ))}
           </div>
         </div>
 
-        <div className="mt-16 p-8 border border-muted/40 rounded-xl bg-card/30 shadow-sm hover:shadow-lg transition-shadow duration-300 max-w-5xl mx-auto">
-          <h3 className="text-2xl font-bold text-center mb-10">Tools & Technologies</h3>
-          <div className="flex flex-wrap justify-center gap-3">
+  <div className="mt-7 sm:mt-16 p-4 sm:p-8 border border-muted/40 rounded-xl bg-card/30 shadow-sm hover:shadow-lg transition-shadow duration-300 w-[96%] sm:max-w-5xl mx-auto">
+          <h3 className="text-xl sm:text-2xl font-bold text-center mb-5 sm:mb-10">Tools & Technologies</h3>
+          <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
             {toolsAndTechnologies.map((tool, index) => (
-              <span
+                <span
                 key={index}
-                className="px-4 py-2 bg-primary/10 text-primary border border-primary/20 rounded-full text-sm font-medium hover:bg-primary/20 transition-colors duration-200"
+                className="px-3 py-1 sm:px-4 sm:py-2 bg-primary/10 text-primary border border-primary/20 rounded-full text-xs sm:text-sm font-medium hover:bg-primary/20 transition-colors duration-200"
               >
                 {tool}
               </span>

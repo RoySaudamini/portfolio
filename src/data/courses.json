@@ -3,7 +3,43 @@
     "title": "Developing Soft Skills and Personality",
     "instructor": "Prof. T. Ravichandran, IIT Kanpur, NPTEL",
     "certificate": true,
-    "certificateUrl": "/src/images/courses/softskills.jpg"
+    "certificateUrl": "/src/images/courses/Developing Soft Skills and Personality.jpg"
+  },
+  {
+    "title": " Cyber Security Fundamentals",
+    "instructor": "University of London, Coursera",
+    "certificate": true,
+    "certificateUrl": "/src/images/courses/Cyber Security Fundamentals.jpg"
+  },
+  {
+    "title": "Getting Started with AWS Generative AI for Developers",
+    "instructor": "Amazon Web Services, Coursera",
+    "certificate": true,
+    "certificateUrl": "/src/images/courses/Getting Started with AWS Generative AI for Developers.jpg"
+  },
+  {
+    "title": "Introduction to Security Principles in Cloud Computing",
+    "instructor": "Google Cloud, Coursera",
+    "certificate": true,
+    "certificateUrl": "/src/images/courses/Introduction to Security Principles in Cloud Computing.jpg"
+  },
+  {
+    "title": "Generative AI for Everyone",
+    "instructor": "DeepLearning.AI, Coursera",
+    "certificate": true,
+    "certificateUrl": "/src/images/courses/Generative AI for Everyone.jpg"
+  },
+  {
+    "title": " Introduction to Information Technology and AWS Cloud",
+    "instructor": "Amazon Web Services, Coursera",
+    "certificate": true,
+    "certificateUrl": "/src/images/courses/Introduction to Information Technology and AWS Cloud.jpg"
+  },
+  {
+    "title": "HTML, CSS, and Javascript for Web Developers",
+    "instructor": "Johns Hopkins University, Coursera",
+    "certificate": true,
+    "certificateUrl": "/src/images/courses/HTML, CSS, and Javascript for Web Developers.jpg"
   },
   {
     "title": "Programming with Generative AI",
@@ -12,10 +48,10 @@
     "certificateUrl": null
   },
   {
-    "title": "Cyber Security Fundamentals",
-    "instructor": "University of London, Coursera",
-    "certificate": false,
-    "certificateUrl": null
+    "title": "Create and Design Digital Products using Canva",
+    "instructor": "Coursera Project Network, Coursera",
+    "certificate": true,
+    "certificateUrl": "/src/images/courses/Create and Design Digital Products using Canva.jpg"
   },
   {
     "title": "C and C++",

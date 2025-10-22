@@ -21,7 +21,7 @@ export const Hero = () => {
           >
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-br from-primary to-accent rounded-2xl blur-2xl opacity-30 animate-glow" />
-              <div className="relative w-80 h-80 sm:w-96 sm:h-96 lg:w-[36rem] lg:h-[36rem] rounded-2xl overflow-hidden border-2 border-primary/30 shadow-2xl">
+              <div className="relative w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 lg:w-[36rem] lg:h-[36rem] rounded-2xl overflow-hidden border-2 border-primary/30 shadow-2xl">
                 <img
                   src={profileImage}
                   alt="Saudamini Roy"

@@ -1,10 +1,24 @@
 [
   {
     "title": "Innovation Battle",
-    "description": "Developed innovative solutions using blockchain technology",
+    "description": "Developed innovative solutions",
     "type": "Project Competition",
     "certificate": true,
     "certificateUrl": "/certificates/innovation_battle.jpg"
+  },
+  {
+    "title": "MystiCanvas",
+    "description": "A Flyer Designing Competition",
+    "type": "Flyer Competition",
+    "certificate": true,
+    "certificateUrl": "/src/images/experience/MystiCanvas.jpg"
+  },
+  {
+    "title": "Coding Ninja",
+    "description": "Online Coading Competition",
+    "type": "Coding Competition",
+    "certificate": true,
+    "certificateUrl": "/src/images/experience/Coding Ninja.jpg"
   },
   {
     "title": "Hack Snippet 3.0",

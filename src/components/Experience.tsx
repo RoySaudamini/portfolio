@@ -9,7 +9,21 @@ export const Experience = () => {
   const [selectedCertificates, setSelectedCertificates] = useState<{name: string, urls: string[]} | null>(null);
   const [currentCertificateIndex, setCurrentCertificateIndex] = useState(0);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [certificateImages, setCertificateImages] = useState<Record<string, string>>({});
   const sectionRef = useRef<HTMLDivElement>(null);
+
+  // Load certificate images dynamically
+  useEffect(() => {
+    const images = import.meta.glob('/src/images/experience/*', { eager: true });
+    const imageMap: Record<string, string> = {};
+    
+    Object.entries(images).forEach(([path, module]) => {
+      const fileName = path.split('/').pop() || '';
+      imageMap[fileName] = (module as { default: string }).default;
+    });
+    
+    setCertificateImages(imageMap);
+  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -39,12 +53,33 @@ export const Experience = () => {
     
     // Check certificateUrl first
     if (exp.certificateUrl && typeof exp.certificateUrl === 'string') {
-      urls.push(exp.certificateUrl);
+      const fileName = exp.certificateUrl.split('/').pop() || '';
+      // Try to find the image in certificateImages with any extension
+      const matchingImage = Object.keys(certificateImages).find(key => {
+        const nameWithoutExt = key.replace(/\.[^/.]+$/, '');
+        const urlWithoutExt = fileName.replace(/\.[^/.]+$/, '');
+        return nameWithoutExt === urlWithoutExt;
+      });
+      
+      if (matchingImage && certificateImages[matchingImage]) {
+        urls.push(certificateImages[matchingImage]);
+      }
     }
     
     // Check certificateUrl2, certificateUrl3, etc.
     while (exp[`certificateUrl${counter + 1}`] && typeof exp[`certificateUrl${counter + 1}`] === 'string') {
-      urls.push(exp[`certificateUrl${counter + 1}`] as string);
+      const certUrl = exp[`certificateUrl${counter + 1}`] as string;
+      const fileName = certUrl.split('/').pop() || '';
+      // Try to find the image in certificateImages with any extension
+      const matchingImage = Object.keys(certificateImages).find(key => {
+        const nameWithoutExt = key.replace(/\.[^/.]+$/, '');
+        const urlWithoutExt = fileName.replace(/\.[^/.]+$/, '');
+        return nameWithoutExt === urlWithoutExt;
+      });
+      
+      if (matchingImage && certificateImages[matchingImage]) {
+        urls.push(certificateImages[matchingImage]);
+      }
       counter++;
     }
     
@@ -77,8 +112,8 @@ export const Experience = () => {
   };
 
   return (
-    <section id="experience" className="py-20 px-4 sm:px-6 lg:px-8 bg-secondary/30" ref={sectionRef}>
-      <div className="container mx-auto">
+    <section id="experience" className="py-16 sm:py-20 px-2 sm:px-6 lg:px-8 bg-secondary/30" ref={sectionRef}>
+      <div className="container mx-auto px-0 sm:px-4">
         <div className="text-center mb-16">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
             Experience
@@ -86,7 +121,7 @@ export const Experience = () => {
           <div className="w-24 h-1 bg-gradient-to-r from-primary to-accent mx-auto rounded-full" />
         </div>
 
-        <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto px-4 sm:px-4">
           {experienceData.map((exp, index) => {
             const Icon = getIcon(exp.type);
             return (
@@ -102,22 +137,22 @@ export const Experience = () => {
                 <CardHeader>
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
-                      <CardTitle className="text-xl mb-2">{exp.title}</CardTitle>
+                      <CardTitle className="text-base sm:text-xl mb-1 sm:mb-2">{exp.title}</CardTitle>
                       {/* <CardDescription className="text-base capitalize">{exp.type}</CardDescription> */}
                     </div>
-                    <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
-                      <Icon className="h-6 w-6 text-primary" />
+                    <div className="w-8 h-8 sm:w-12 sm:h-12 rounded-lg bg-primary/10 flex items-center justify-center">
+                      <Icon className="h-4 w-4 sm:h-6 sm:w-6 text-primary" />
                     </div>
                   </div>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-sm text-muted-foreground mb-4">{exp.description}</p>
-                  <div className="flex items-center justify-between gap-4">
-                    <span className="text-sm text-muted-foreground capitalize">{exp.type}</span>
+                  <p className="text-xs sm:text-sm text-muted-foreground mb-2 sm:mb-4">{exp.description}</p>
+                  <div className="flex items-center justify-between gap-2 sm:gap-4">
+                    <span className="text-xs sm:text-sm text-muted-foreground capitalize">{exp.type}</span>
                     {exp.certificate && (
                       <button
                         onClick={() => handleCertificateClick(exp.title, exp)}
-                        className="text-xs bg-primary/10 text-primary px-3 py-1 rounded-full font-medium hover:bg-primary/20 transition-colors cursor-pointer"
+                        className="text-[10px] sm:text-xs bg-primary/10 text-primary px-2 sm:px-3 py-1 rounded-full font-medium hover:bg-primary/20 transition-colors cursor-pointer"
                       >
                         View Certificate
                       </button>
@@ -168,7 +203,17 @@ export const Experience = () => {
                   if (fallback) fallback.classList.remove('hidden');
                 }}
               />
-            ) : null}
+            ) : (
+              // Show fallback immediately if no certificate URL is available
+              <div className="text-center space-y-4">
+                <Award size={64} className="text-primary mx-auto" />
+                <h3 className="text-xl font-semibold">Certificate of Participation</h3>
+                <p className="text-muted-foreground">For {selectedCertificates?.name}</p>
+                <p className="text-sm text-muted-foreground mt-4">
+                  Certificate image could not be loaded.
+                </p>
+              </div>
+            )}
             
             {/* Next button */}
             {selectedCertificates && selectedCertificates.urls.length > 1 && currentCertificateIndex < selectedCertificates.urls.length - 1 && (
@@ -181,7 +226,7 @@ export const Experience = () => {
               </button>
             )}
             
-            {/* Fallback placeholder */}
+            {/* Fallback placeholder for onError */}
             <div className="text-center space-y-4 hidden">
               <Award size={64} className="text-primary mx-auto" />
               <h3 className="text-xl font-semibold">Certificate of Participation</h3>

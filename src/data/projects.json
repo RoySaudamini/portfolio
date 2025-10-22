@@ -4,8 +4,7 @@
     "description": "An intelligent system designed with Python, OpenCV, Arduino UNO R3, RFID, and an LCD screen for automated child check-in and check-out at schools and daycare centers.",
     "technologies": ["Python", "OpenCV","Ultralytics", "Arduino", "RFID", "PYWhat Kit"],
     "status": "Completed",
-    "github": "#",
-    "demo": "#"
+    "github": "#"
   },
   {
     "title": "FarmBot: Smart Agriculture System",

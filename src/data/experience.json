@@ -4,7 +4,7 @@
     "description": "Developed innovative solutions",
     "type": "Project Competition",
     "certificate": true,
-    "certificateUrl": "/certificates/innovation_battle.jpg"
+    "certificateUrl": "/src/images/experience/Innovation Battle .jpg"
   },
   {
     "title": "MystiCanvas",
@@ -12,6 +12,13 @@
     "type": "Flyer Competition",
     "certificate": true,
     "certificateUrl": "/src/images/experience/MystiCanvas.jpg"
+  },
+  {
+    "title": "The Viksit Bharat Quiz",
+    "description": "The quiz tests knowledge on various aspect of the country and vision towards Viksit Bharat.",
+    "type": "Quiz Competition",
+    "certificate": true,
+    "certificateUrl": "/src/images/experience/The Viksit Bharat Quiz.jpg"
   },
   {
     "title": "Coding Ninja",
